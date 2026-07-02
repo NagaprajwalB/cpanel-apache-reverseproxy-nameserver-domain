@@ -1,0 +1,173 @@
+{
+  "info": {
+    "name": "Ashvayana Admin Panel APIs",
+    "description": "Auto-generated Postman collection for all Ashvayana controllers with exact DTO payloads.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success && jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set(\"jwt_token\", jsonData.data.token);",
+                  "    console.log(\"JWT Token automatically set for future requests!\");",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enquiries",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/enquiries?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["api", "enquiries"], "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/enquiries/1", "host": ["{{baseUrl}}"], "path": ["api", "enquiries", "1"] } } },
+        { "name": "Update Status", "request": { "method": "PATCH", "url": { "raw": "{{baseUrl}}/api/enquiries/1/status?status=Contacted", "host": ["{{baseUrl}}"], "path": ["api", "enquiries", "1", "status"], "query": [ { "key": "status", "value": "Contacted" } ] } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/enquiries/1", "host": ["{{baseUrl}}"], "path": ["api", "enquiries", "1"] } } }
+      ]
+    },
+    {
+      "name": "Materials",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/materials?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["api", "materials"], "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/materials/1", "host": ["{{baseUrl}}"], "path": ["api", "materials", "1"] } } },
+        { "name": "Create", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/materials", "host": ["{{baseUrl}}"], "path": ["api", "materials"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"Italian Marble\",\n  \"description\": \"Premium imported marble\",\n  \"category\": \"Flooring\",\n  \"imageUrl\": \"https://example.com/marble.jpg\",\n  \"brand\": \"Statuario\",\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Update", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/materials/1", "host": ["{{baseUrl}}"], "path": ["api", "materials", "1"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"Italian Marble Updated\",\n  \"description\": \"Premium imported marble updated\",\n  \"category\": \"Flooring\",\n  \"imageUrl\": \"https://example.com/marble-new.jpg\",\n  \"brand\": \"Statuario\",\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/materials/1", "host": ["{{baseUrl}}"], "path": ["api", "materials", "1"] } } }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/projects?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["api", "projects"], "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/projects/1", "host": ["{{baseUrl}}"], "path": ["api", "projects", "1"] } } },
+        { "name": "Create", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/projects", "host": ["{{baseUrl}}"], "path": ["api", "projects"] }, "body": { "mode": "raw", "raw": "{\n  \"title\": \"Ashvayana Residency\",\n  \"slug\": \"ashvayana-residency\",\n  \"description\": \"A luxury residential project\",\n  \"shortDescription\": \"Luxury apartments in city center\",\n  \"location\": \"Downtown\",\n  \"status\": \"ONGOING\",\n  \"thumbnailUrl\": \"https://example.com/image.jpg\",\n  \"completionYear\": \"2025\",\n  \"totalUnits\": 120,\n  \"featured\": true,\n  \"metaTitle\": \"Ashvayana Residency - Luxury Flats\",\n  \"metaDescription\": \"Buy luxury flats\"\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Update", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/projects/1", "host": ["{{baseUrl}}"], "path": ["api", "projects", "1"] }, "body": { "mode": "raw", "raw": "{\n  \"title\": \"Ashvayana Residency Updated\",\n  \"slug\": \"ashvayana-residency\",\n  \"description\": \"A luxury residential project\",\n  \"shortDescription\": \"Luxury apartments in city center\",\n  \"location\": \"Downtown\",\n  \"status\": \"ONGOING\",\n  \"thumbnailUrl\": \"https://example.com/image.jpg\",\n  \"completionYear\": \"2025\",\n  \"totalUnits\": 120,\n  \"featured\": true,\n  \"metaTitle\": \"Ashvayana Residency - Luxury Flats\",\n  \"metaDescription\": \"Buy luxury flats\"\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/projects/1", "host": ["{{baseUrl}}"], "path": ["api", "projects", "1"] } } }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/users", "host": ["{{baseUrl}}"], "path": ["api", "users"] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/users/1", "host": ["{{baseUrl}}"], "path": ["api", "users", "1"] } } },
+        { "name": "Create", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/users", "host": ["{{baseUrl}}"], "path": ["api", "users"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"ADMIN\"\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Update", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/users/1", "host": ["{{baseUrl}}"], "path": ["api", "users", "1"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"John Doe Updated\",\n  \"role\": \"EDITOR\"\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Toggle Active", "request": { "method": "PATCH", "url": { "raw": "{{baseUrl}}/api/users/1/toggle-active", "host": ["{{baseUrl}}"], "path": ["api", "users", "1", "toggle-active"] } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/users/1", "host": ["{{baseUrl}}"], "path": ["api", "users", "1"] } } }
+      ]
+    },
+    {
+      "name": "Team",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/team?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["api", "team"], "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/team/1", "host": ["{{baseUrl}}"], "path": ["api", "team", "1"] } } },
+        { "name": "Create", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/team", "host": ["{{baseUrl}}"], "path": ["api", "team"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"Alice Johnson\",\n  \"designation\": \"Chief Architect\",\n  \"bio\": \"15+ years of experience in luxury homes.\",\n  \"imageUrl\": \"https://example.com/alice.jpg\",\n  \"email\": \"alice@ashvayana.com\",\n  \"phone\": \"+91-9999999999\",\n  \"linkedin\": \"https://linkedin.com/in/alice\",\n  \"displayOrder\": 1,\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Update", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/team/1", "host": ["{{baseUrl}}"], "path": ["api", "team", "1"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"Alice Johnson Updated\",\n  \"designation\": \"Chief Architect\",\n  \"bio\": \"15+ years of experience in luxury homes.\",\n  \"imageUrl\": \"https://example.com/alice.jpg\",\n  \"email\": \"alice@ashvayana.com\",\n  \"phone\": \"+91-9999999999\",\n  \"linkedin\": \"https://linkedin.com/in/alice\",\n  \"displayOrder\": 1,\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/team/1", "host": ["{{baseUrl}}"], "path": ["api", "team", "1"] } } }
+      ]
+    },
+    {
+      "name": "Testimonials",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/testimonials?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["api", "testimonials"], "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/testimonials/1", "host": ["{{baseUrl}}"], "path": ["api", "testimonials", "1"] } } },
+        { "name": "Create", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/testimonials", "host": ["{{baseUrl}}"], "path": ["api", "testimonials"] }, "body": { "mode": "raw", "raw": "{\n  \"authorName\": \"Bob Williams\",\n  \"authorDesignation\": \"Homeowner\",\n  \"authorImage\": \"https://example.com/bob.jpg\",\n  \"content\": \"Excellent service and build quality!\",\n  \"rating\": 5,\n  \"propertyName\": \"Ashvayana Residency\",\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Update", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/testimonials/1", "host": ["{{baseUrl}}"], "path": ["api", "testimonials", "1"] }, "body": { "mode": "raw", "raw": "{\n  \"authorName\": \"Bob Williams Updated\",\n  \"authorDesignation\": \"Homeowner\",\n  \"authorImage\": \"https://example.com/bob.jpg\",\n  \"content\": \"Excellent service and build quality!\",\n  \"rating\": 5,\n  \"propertyName\": \"Ashvayana Residency\",\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/testimonials/1", "host": ["{{baseUrl}}"], "path": ["api", "testimonials", "1"] } } }
+      ]
+    },
+    {
+      "name": "Properties",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/properties?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["api", "properties"], "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/properties/1", "host": ["{{baseUrl}}"], "path": ["api", "properties", "1"] } } },
+        { "name": "Create", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/properties", "host": ["{{baseUrl}}"], "path": ["api", "properties"] }, "body": { "mode": "raw", "raw": "{\n  \"title\": \"Modern 3BHK Apartment\",\n  \"slug\": \"modern-3bhk-apartment\",\n  \"description\": \"Spacious and modern...\",\n  \"price\": 12500000.00,\n  \"priceLabel\": \"Starting at\",\n  \"type\": \"APARTMENT\",\n  \"status\": \"AVAILABLE\",\n  \"address\": \"123 Main St\",\n  \"city\": \"Metropolis\",\n  \"state\": \"State\",\n  \"pincode\": \"123456\",\n  \"bedrooms\": 3,\n  \"bathrooms\": 2,\n  \"area\": 1850.5,\n  \"areaUnit\": \"Sq.Ft\",\n  \"floor\": 5,\n  \"totalFloors\": 15,\n  \"parkingSpaces\": 2,\n  \"thumbnailUrl\": \"https://example.com/thumb.jpg\",\n  \"metaTitle\": \"Buy 3BHK Apartment\",\n  \"metaDescription\": \"Great apartment for sale\",\n  \"keywords\": \"3BHK, apartment, sale\",\n  \"openGraphImage\": \"https://example.com/og.jpg\",\n  \"brochureUrl\": \"https://example.com/brochure.pdf\",\n  \"videoUrl\": \"https://youtube.com/watch?v=...\",\n  \"featured\": true,\n  \"locationId\": 1,\n  \"amenityIds\": [1, 2, 3],\n  \"imageUrls\": [\"url1\", \"url2\"]\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Update", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/properties/1", "host": ["{{baseUrl}}"], "path": ["api", "properties", "1"] }, "body": { "mode": "raw", "raw": "{\n  \"title\": \"Modern 3BHK Apartment Updated\",\n  \"slug\": \"modern-3bhk-apartment\",\n  \"description\": \"Spacious and modern...\",\n  \"price\": 12500000.00,\n  \"priceLabel\": \"Starting at\",\n  \"type\": \"APARTMENT\",\n  \"status\": \"AVAILABLE\",\n  \"address\": \"123 Main St\",\n  \"city\": \"Metropolis\",\n  \"state\": \"State\",\n  \"pincode\": \"123456\",\n  \"bedrooms\": 3,\n  \"bathrooms\": 2,\n  \"area\": 1850.5,\n  \"areaUnit\": \"Sq.Ft\",\n  \"floor\": 5,\n  \"totalFloors\": 15,\n  \"parkingSpaces\": 2,\n  \"thumbnailUrl\": \"https://example.com/thumb.jpg\",\n  \"metaTitle\": \"Buy 3BHK Apartment\",\n  \"metaDescription\": \"Great apartment for sale\",\n  \"keywords\": \"3BHK, apartment, sale\",\n  \"openGraphImage\": \"https://example.com/og.jpg\",\n  \"brochureUrl\": \"https://example.com/brochure.pdf\",\n  \"videoUrl\": \"https://youtube.com/watch?v=...\",\n  \"featured\": true,\n  \"locationId\": 1,\n  \"amenityIds\": [1, 2, 3],\n  \"imageUrls\": [\"url1\", \"url2\"]\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/properties/1", "host": ["{{baseUrl}}"], "path": ["api", "properties", "1"] } } }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        { "name": "Get", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/settings", "host": ["{{baseUrl}}"], "path": ["api", "settings"] } } },
+        { "name": "Save", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/settings", "host": ["{{baseUrl}}"], "path": ["api", "settings"] }, "body": { "mode": "raw", "raw": "{\n  \"companyName\": \"Ashvayana Properties\",\n  \"email\": \"contact@ashvayana.com\",\n  \"phone\": \"+91-8000000000\",\n  \"address\": \"456 Corporate Road, City\",\n  \"googleMapsLink\": \"https://maps.google.com/...\",\n  \"facebookUrl\": \"https://facebook.com/ashvayana\",\n  \"instagramUrl\": \"https://instagram.com/ashvayana\",\n  \"linkedinUrl\": \"https://linkedin.com/company/ashvayana\",\n  \"youtubeUrl\": \"https://youtube.com/ashvayana\",\n  \"footerText\": \"© 2024 Ashvayana. All rights reserved.\",\n  \"logoUrl\": \"https://example.com/logo.png\",\n  \"faviconUrl\": \"https://example.com/favicon.ico\"\n}", "options": { "raw": { "language": "json" } } } } }
+      ]
+    },
+    {
+      "name": "Amenities",
+      "item": [
+        { "name": "Get All", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/amenities?page=0&size=10", "host": ["{{baseUrl}}"], "path": ["api", "amenities"], "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ] } } },
+        { "name": "Get By Id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/amenities/1", "host": ["{{baseUrl}}"], "path": ["api", "amenities", "1"] } } },
+        { "name": "Create", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/api/amenities", "host": ["{{baseUrl}}"], "path": ["api", "amenities"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"Swimming Pool\",\n  \"icon\": \"pool-icon-class\",\n  \"description\": \"Olympic sized swimming pool.\",\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Update", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/amenities/1", "host": ["{{baseUrl}}"], "path": ["api", "amenities", "1"] }, "body": { "mode": "raw", "raw": "{\n  \"name\": \"Swimming Pool Updated\",\n  \"icon\": \"pool-icon-class\",\n  \"description\": \"Olympic sized swimming pool.\",\n  \"active\": true\n}", "options": { "raw": { "language": "json" } } } } },
+        { "name": "Delete", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/amenities/1", "host": ["{{baseUrl}}"], "path": ["api", "amenities", "1"] } } }
+      ]
+    },
+    {
+      "name": "Upload",
+      "item": [
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/api/upload", "host": ["{{baseUrl}}"], "path": ["api", "upload"] },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
