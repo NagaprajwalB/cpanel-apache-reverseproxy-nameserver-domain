@@ -1,0 +1,38 @@
+services:
+  app:
+    build: .
+    container_name: ashvayana-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ashvayana
+      SPRING_DATASOURCE_USERNAME: ashvayana
+      SPRING_DATASOURCE_PASSWORD: ashvayana_password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      # JWT_SECRET: change-me
+      # CLOUDINARY_URL: cloudinary://<api_key>:<api_secret>@<cloud_name>
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: ashvayana-db
+    environment:
+      POSTGRES_DB: ashvayana
+      POSTGRES_USER: ashvayana
+      POSTGRES_PASSWORD: ashvayana_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ashvayana -d ashvayana"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata:
