@@ -1,0 +1,58 @@
+MIN REQUIREMENT -- UBUNTU 24.04 [ recommended ]
+                   Elastic IP [ recommended]
+                   40 GB STORAGE
+```
+sudo apt install net-tools
+```
+[ to donwload the ifconfig ]
+```
+ifconfig 
+```
+[lookout the public ip address]
+
+sudo su -
+[ change to root user ]
+
+passwd 
+
+[987456]
+
+apt update && apt upgrade
+
+nano /etc/hosts
+
+[ ADD - <public-ip> cpanel.localhost  ]
+
+nano /etc/hostname
+
+[ just save and exit ]
+
+apt install perl screen -y
+
+[ perl and screen installation ]
+
+cd /home
+
+curl -o latest -L https://securedownloads.cpanel.net/latest
+
+[ cpanel Download ]
+
+sh latest 
+
+[ run to start installation ]
+
+
+WHM -- <public-ip>:2087
+CPANEL -- <public-ip>:2083
+
+----------------------------
+WHM CREDENTIALS
+Username -- root
+Passward -- 987456
+----------------------------
+
+
+IN FAVORITES SECTION IN WHM DASHBOARD 
+* CREATE A NEW ACCOUNT [ cpanel ]
+
+![alt text](image.png)
